@@ -9,14 +9,16 @@
     <!-- interpolation -->
     <div>{{ tags }}</div>
 
+    <pre>{{ newTag }}</pre>
+
     <input
         type="text"
-        v-bind:value="newTag"
-        @keydown.enter="tags.push($event.target.value)"
-        @keydown.tab.prevent="tags.push($event.target.value)"
+        v-model.trim="newTag"
+        @keydown.enter="tags.push(newTag)"
+        @keydown.tab.prevent="tags.push(newTag)"
     />
 
-    <!-- <div>{{ tags.length }}</div> -->
+    <div>{{ tags.length }}</div>
 </template>
 
 <script>
