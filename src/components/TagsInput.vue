@@ -2,14 +2,19 @@
     <!-- directive -->
     <!-- <div v-text="tags"></div> -->
     <div v-if="!tags.length">You have no any tags</div>
-    <div v-for="tag in tags">{{ tag }}</div>
+    <!-- <div v-for="tag in tags">{{ tag }}</div> -->
 
-    <hr>
+    <!-- <hr> -->
 
     <!-- interpolation -->
     <div>{{ tags }}</div>
 
-    <input type="text" v-bind:value="newTag" value="nuxt"/>
+    <input
+        type="text"
+        v-bind:value="newTag"
+        @keydown.enter="tags.push($event.target.value)"
+        @keydown.tab.prevent="tags.push($event.target.value)"
+    />
 
     <!-- <div>{{ tags.length }}</div> -->
 </template>
