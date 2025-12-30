@@ -6,26 +6,47 @@
 
     <!-- <hr> -->
 
-    <!-- interpolation -->
-    <div>{{ tags }}</div>
+    <div v-for="(tag, index) in tags">
+        {{ tag }}
+        <a href="#" @click.prevent="removeTag(index)">&times;</a>
+    </div>
 
-    <pre>{{ newTag }}</pre>
+    <!-- interpolation -->
+    <!-- <div>{{ tags }}</div> -->
+    <pre style="color: red;">{{ newTag }}</pre>
 
     <input
         type="text"
         v-model.trim="newTag"
-        @keydown.enter="tags.push(newTag)"
-        @keydown.tab.prevent="tags.push(newTag)"
+        @keydown.enter="addNewTag"
+        @keydown.tab.prevent="addNewTag"
+        @keydown.delete="removeLastTag"
     />
 
     <div>{{ tags.length }}</div>
 </template>
 
 <script>
-export default {
-    data: () => ({
-        tags: ["Vue", "React", "Angular"],
-        newTag: "Next"
-    })
-}
+    export default {
+        data: () => ({
+            tags: ["Vue", "React", "Angular"],
+            newTag: "Next"
+        }),
+        methods: {
+            addNewTag() {
+                if (this.newTag) {
+                    this.tags.push(this.newTag);
+                    this.newTag = "";
+                }
+            },
+            removeTag(index) {
+                this.tags.splice(index, 1);
+            },
+            removeLastTag() {
+                if (this.newTag.length === 0) {
+                    this.removeTag(this.tags.length - 1);
+                }
+            }
+        }
+    }
 </script>
