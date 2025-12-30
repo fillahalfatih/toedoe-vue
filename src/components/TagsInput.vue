@@ -13,7 +13,8 @@
 
     <!-- interpolation -->
     <!-- <div>{{ tags }}</div> -->
-    <pre style="color: red;">{{ newTag }}</pre>
+    <!-- <pre :class="tags.includes(newTag) ? 'tags-exists' : ''">{{ newTag }}</pre> -->
+    <pre :class="{ 'tags-exists': tags.includes(newTag) }">{{ newTag }}</pre>
 
     <input
         type="text"
@@ -50,3 +51,10 @@
         }
     }
 </script>
+
+<style scoped>
+    .tags-exists {
+        color: red;
+        text-decoration: line-through;
+    }
+</style>
