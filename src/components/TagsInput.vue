@@ -14,7 +14,7 @@
     <!-- interpolation -->
     <!-- <div>{{ tags }}</div> -->
     <!-- <pre :class="tags.includes(newTag) ? 'tags-exists' : ''">{{ newTag }}</pre> -->
-    <pre :class="{ 'tags-exists': tags.includes(newTag) }">{{ newTag }}</pre>
+    <pre :class="{ 'tags-exists': isTagExists }">{{ newTag }}</pre>
 
     <input
         type="text"
@@ -33,9 +33,14 @@
             tags: ["Vue", "React", "Angular"],
             newTag: "Next"
         }),
+        computed:{
+            isTagExists() {
+                return this.tags.includes(this.newTag);
+            }
+        },
         methods: {
             addNewTag() {
-                if (this.newTag) {
+                if (this.newTag && !this.isTagExists) {
                     this.tags.push(this.newTag);
                     this.newTag = "";
                 }
